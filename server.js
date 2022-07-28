@@ -15,19 +15,18 @@ app.use(
   })
 );
 
-app.use("/", (rea, res, next) => {
+app.use("/user", require("./routes/userRouter"));
+app.use("/user", (rea, res, next) => {
   res.json({ msg: "hello" });
 });
 
 const PORT = process.env.port || 5000;
 const URI = process.env.MONGODB_URL;
 
-try {
-  mongoose.connect(URI);
-  console.log("connected to MongoDB");
-} catch (error) {
-  console.log("ERROR FROM ERRROR", error);
-}
+mongoose
+  .connect(URI)
+  .then(() => console.log("Connected to MongoDB..."))
+  .catch((err) => console.error("Could not connect to MongoDB...", err));
 
 app.listen(PORT, () => {
   console.log("Serveri is running on port", PORT);
