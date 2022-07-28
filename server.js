@@ -16,7 +16,7 @@ app.use(
 );
 
 app.use("/user", require("./routes/userRouter"));
-app.use("/user", (rea, res, next) => {
+app.use("/", (rea, res, next) => {
   res.json({ msg: "hello" });
 });
 
